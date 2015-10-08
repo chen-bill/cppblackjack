@@ -90,17 +90,20 @@ class Deck{
 // main program 
 
 void hitMe(int player);
+void printHand();
 void recalculateHandTotal();
 
 int dealerTotalValue = 0;
 int dealerTotalSuit = 0;
 int dealerCardCounter = 0;
 int dealerHand [5] = {0};
+int dealerHandSuit [5] = {0};
 
 int playerTotalValue = 0;
 int playerTotalSuit = 0;
 int playerCardCounter = 0;
 int playerHand [5] = {0};
+int playerHandSuit [5] = {0};
 
 int newCardValue = 0;
 int newCardSuit = 0;
@@ -125,9 +128,7 @@ int main(){
 	while(userInput != "stand"){
 
 		cout << "Here are your cards: "<< endl;
-		for (int i = 0; i <= playerCardCounter-1; i++){
-			cout << playerHand[i] << " ";
-		}
+		printHand();
 		cout << endl;
 		//winning/losing conditions
 		if (playerCardCounter == 5 && playerTotalValue <= 21){
@@ -169,7 +170,6 @@ int main(){
 			cout << "You lose! Dealer has a total of " << dealerTotalValue << " and you have a total of " << playerTotalValue << "."<< endl;
 		}
 	}
-
 	cout <<endl<< "Game over"; 
 	return 0;
 }
@@ -196,10 +196,12 @@ void hitMe(int player){
 
 	if (player == 0){
 		dealerHand[dealerCardCounter] = value;
+		dealerHandSuit[dealerCardCounter] = suit;
 		dealerCardCounter ++;
 	}
 	else{
 		playerHand[playerCardCounter] = value;
+		playerHandSuit[playerCardCounter] = suit;
 		playerCardCounter ++;
 	}
 }
@@ -211,6 +213,58 @@ void recalculateHandTotal(){
 	{
 		dealerTotalValue += dealerHand[i];
 		playerTotalValue += playerHand[i];
+	}
+}
+
+void printHand(){
+	for(int i = 0 ; i < playerCardCounter ; i ++){
+		cout << "  _________ " << endl;
+		cout << " /         \\" << endl;
+		if (playerHand[i] < 10){
+			cout << "|" << playerHand[i] << "          |" << endl;
+		}
+		else
+			cout << "|" << playerHand[i] << "         |" << endl;
+
+		if (playerHandSuit[i] == 0){
+			cout << "|           |" << endl;
+			cout << "|    /\\     |" << endl;
+			cout << "|   <  >    |" << endl;
+			cout << "|    \\/     |" << endl;
+			cout << "|           |" << endl;
+
+		}
+		if (playerHandSuit[i] == 1){
+			cout << "|     _     |" << endl;
+			cout << "|    (_)    |" << endl;
+			cout << "|   (_)_)   |" << endl;
+			cout << "|    /_\\    |" << endl;
+			cout << "|           |" << endl;
+		}
+		if (playerHandSuit[i] == 2){
+			cout << "|    _ _    |" << endl;
+			cout << "|   / ^ \\   |" << endl;
+			cout << "|   \\   /   |" << endl;
+			cout << "|    \\ /    |" << endl;
+			cout << "|     `     |" << endl;
+
+		}
+		if (playerHandSuit[i] == 3){
+			cout << "|     ,     |" << endl;
+			cout << "|    / \\    |" << endl;
+			cout << "|   (_ _)   |" << endl;
+			cout << "|    /_\\    |" << endl;
+			cout << "|           |" << endl;
+		}
+
+		if (playerHand[i] < 10){
+			cout << "|          "<< playerHand[i] << "|" << endl;
+		}
+		else
+			cout << "|         "<< playerHand[i] << "|" << endl;
+
+		cout << " \\_________/" << endl << endl;
+
 	}
 }
 
